@@ -11,7 +11,7 @@ Tanto este monitoramente quanto as atividades recorrentes do mesmo (irrigar ou s
 void Wifi_INICIANDO()
 
 
-&nbsp Realiza conxão com a rede Wifi determinada.
+Realiza conxão com a rede Wifi determinada.
 
 void WIFI_Reconectando()
 Reconectar-se ao WiFi
