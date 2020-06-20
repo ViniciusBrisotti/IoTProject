@@ -2,7 +2,7 @@
 Projeto Irrigação Automatizada, referente a matéria de Objetos Inteligentes
 
 
-Objetivo do projeto:
+- Objetivo do projeto:
 
 
 Sistema de irrigação automática que idêntifica, com base na umidade do solo, a necessidade de liverar um fluxo de água no solo. Quando a umidade encontra-se de acordo com o um solo saudáve para o desenvolvimento da planta o fluxo de água é sessado. 
