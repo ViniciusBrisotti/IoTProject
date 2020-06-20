@@ -1,6 +1,3 @@
-### Irrigação Automatizada
-Projeto Irrigação Automatizada, referente a matéria de Objetos Inteligentes
-
 
 # Objetivo do projeto:
 
