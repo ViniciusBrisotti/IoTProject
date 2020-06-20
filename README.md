@@ -8,7 +8,10 @@ Tanto este monitoramente quanto as atividades recorrentes do mesmo (irrigar ou s
 
 -Métodos utilizados e suas respectivas descrições:
 
-void Wifi_INICIANDO() 
+void Wifi_INICIANDO()
+
+
+&nbsp
 Realiza conxão com a rede Wifi determinada.
 
 void WIFI_Reconectando()
