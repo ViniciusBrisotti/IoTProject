@@ -113,11 +113,6 @@ A Placa de Ensaio permite que as conexões sejam realizadas e testadas sem que, 
 Neste projeto foram utilizadas 2 Placas de Ensaio: uma de 400 furos e outra de 630 furos.
 
 
-# Métodos e sua descrição:
-
-
-Os sensores de temperatura estarão em contato com o solo e enviarão informações acerca de suas condições de temperatura levando o software a concluir, por condições na programação pré-definidas, se o solo encontra-se molhado ou ressecado e, com base nisto, realizará a ação de permitir a abertura da válvula Solenoide para que o fluxo de água ocorra ou manter a válvula Solenoide fechada, impedindo o fluxo de água. Mensagens informativas acerca das condições do solo e ações pelo software tomadas serão, em caráter de monitoramento, á plataforma de broker Mosquitto enviadas afim de que os dados possam ser pelo usuário analisadas e o cuidado com o solo supervisionado. Para tal comunicação a placa NodeMCU Esp8266 enviará, via protocolo Broker MQTT, as informações para a plataforma Mosquitto, possibilitando então a apresentação dos dados no aparelho celular através do aplicativo IoT MQTT Panel.
-
 
 
 
