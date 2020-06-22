@@ -25,8 +25,8 @@
 #define SAIDA_COMANDO_VALVULA       D0     //saída do NodeMCU que acionará a válvula de vazão solenóide de água
    
 //defines de id mqtt e tópicos para publicação e subscribe
-#define TOPICO_SUBSCRIBE "SmartPlantaEnvia18101995Regar"  
-#define TOPICO_SUBSCRIBE "SmartPlantaEnvia18101995NaoRegar" //tópico MQTT de escuta
+#define TOPICO_SUBSCRIBE_REGAR "SmartPlantaEnvia18101995Regar"  
+#define TOPICO_SUBSCRIBE_NAO_REGAR "SmartPlantaEnvia18101995NaoRegar" //tópico MQTT de escuta
 #define TOPICO_PUBLISH   "SmartPlantaRecebe18101995"    //tópico MQTT de envio de informações para Broker
                                                   //IMPORTANTE: recomendamos fortemente alterar os nomes
                                                   //            desses tópicos. Caso contrário, há grandes
@@ -97,17 +97,32 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
 {
 
   String msg;
-  
-    /* obtem a string do payload recebido */
+ 
+    //obtem a string do payload recebido
     for(int i = 0; i < length; i++) 
     {
        char c = (char)payload[i];
        msg += c;
     }
-   Serial.println(msg);
+    
+    Serial.print(msg);
+//    if (msg.equals("L"))
+//    {
+//        digitalWrite(SAIDA_COMANDO_VALVULA,HIGH);  //abre a válvula de vazão solenóide de água
+//        delay(TEMPO_PARA_REGAR);
+//        digitalWrite(SAIDA_COMANDO_VALVULA,LOW);  //fecha a válvula de vazão solenóide de água
+//    }
+// 
+//    //verifica se deve colocar nivel alto de tensão na saída D0:
+//    if (msg.equals("D"))
+//    {
+//        digitalWrite(SAIDA_COMANDO_VALVULA,LOW);  //fecha a válvula de vazão solenóide de água
+//    }
+     
+}
 
     
-  }
+  
   
 //Função: reconecta-se ao broker MQTT (caso ainda não esteja conectado ou em caso de a conexão cair)
 //        em caso de sucesso na conexão ou reconexão, o subscribe dos tópicos é refeito.
@@ -122,7 +137,8 @@ void reconnectMQTT()
         if (MQTT.connect(ID_MQTT)) 
         {
             Serial.println("Conectado com sucesso ao broker MQTT!");
-            MQTT.subscribe(TOPICO_SUBSCRIBE); 
+            MQTT.subscribe(TOPICO_SUBSCRIBE_REGAR); 
+            MQTT.subscribe(TOPICO_SUBSCRIBE_NAO_REGAR);
         } 
         else
         {
@@ -239,7 +255,8 @@ void loop()
     digitalWrite(SAIDA_COMANDO_VALVULA,LOW);  //por default, a válvula de vazão solenóide de água começa fechada
     
     VerificaConexoesWiFIEMQTT(); 
-   
+    //void mqtt_callback();
+    
     UmidadePercentualLida = FazLeituraUmidade();
     UmidadePercentualTruncada = (int)UmidadePercentualLida; //trunca umidade como número inteiro
     
@@ -257,7 +274,8 @@ void loop()
         lastMQTTSendTime = millis();
 
     }
-     
+    
+    void mqtt_callback(char* topic, byte* payload, unsigned int length);
 //    verifica se a planta deve ser regada
     if (UmidadePercentualTruncada <= LIMITE_UMIDADE_PARA_REGAR)
     {
@@ -266,17 +284,10 @@ void loop()
         delay(TEMPO_PARA_REGAR);
         digitalWrite(SAIDA_COMANDO_VALVULA,LOW);  //fecha a válvula de vazão solenóide de água
     }
-    else{
-      void mqtt_callback(char* topic, byte* payload, unsigned int length);
-    }
-    if (TOPICO_SUBSCRIBER, "SmartPlantaEnvia18101995Regar"){
-        digitalWrite(SAIDA_COMANDO_VALVULA,HIGH);  //abre a válvula de vazão solenóide de água
-        delay(TEMPO_PARA_REGAR);
-        digitalWrite(SAIDA_COMANDO_VALVULA,LOW);  //fecha a válvula de vazão solenóide de água
-    }
-    if (TOPICO_SUBSCRIBER, "SmartPlantaEnvia18101995Regar"){
-       digitalWrite(SAIDA_COMANDO_VALVULA,LOW);  //fecha a válvula de vazão solenóide de água
-    }
+//    else{
+//      void mqtt_callback(char* topic, byte* payload, unsigned int length);
+//    }
+    
       
     delay(1000);
 }
